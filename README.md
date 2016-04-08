@@ -1,20 +1,21 @@
-# React Native Des (remobile)
-A des crypto for react-native
+# React Native Toast (remobile)
+A android like toast for react-native support for ios and android
 
 ## Installation
 ```sh
-npm install @remobile/react-native-des --save
+npm install @remobile/react-native-toast --save
 ```
+
 ### Installation (iOS)
-* Drag RCTDes.xcodeproj to your project on Xcode.
-* Click on your main project file (the one that represents the .xcodeproj) select Build Phases and drag libRCTDes.a from the Products folder inside the RCTDes.xcodeproj.
+* Drag RCTToast.xcodeproj to your project on Xcode.
+* Click on your main project file (the one that represents the .xcodeproj) select Build Phases and drag libRCTToast.a from the Products folder inside the RCTToast.xcodeproj.
 * Look for Header Search Paths and make sure it contains both $(SRCROOT)/../../../react-native/React as recursive.
 
 ### Installation (Android)
 ```gradle
 ...
-include ':react-native-des'
-project(':react-native-des').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-des/android/RCTDes')
+include ':react-native-toast'
+project(':react-native-toast').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-toast/android')
 ```
 
 * In `android/app/build.gradle`
@@ -23,18 +24,17 @@ project(':react-native-des').projectDir = new File(rootProject.projectDir, '../n
 ...
 dependencies {
     ...
-    compile project(':react-native-des')
+    compile project(':react-native-toast')
 }
 ```
 
 * register module (in MainActivity.java)
 
 ```java
-import com.remobile.des.*;  // <--- import
+import com.remobile.toast.*;  // <--- import
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
   ......
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
       .setBundleAssetName("index.android.bundle")
       .setJSMainModuleName("index.android")
       .addPackage(new MainReactPackage())
-      .addPackage(new RCTDesPackage())              // <------ add here
+      .addPackage(new RCTToastPackage())              // <------ add here
       .setUseDeveloperSupport(BuildConfig.DEBUG)
       .setInitialLifecycleState(LifecycleState.RESUMED)
       .build();
@@ -56,28 +56,71 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
   }
 
   ......
-
 }
 ```
+
+### Screencasts
+![ios](https://github.com/remobile/react-native-toast/blob/master/screencasts/ios.gif)
 
 ## Usage
 
 ### Example
 ```js
-var Des = require('@remobile/react-native-des');
+var React = require('react-native');
+var {
+    StyleSheet,
+    View,
+    Image
+} = React;
 
-Des.encrypt("fangyunjiang is a good developer", "ABCDEFGH", function(base64) {
-    console.log(base64); //wWcr2BJdyldTHn4z3AxA0qBIdHQkIKmpqhTgNuRd3fAFXzvIO5347g==
-    Des.decrypt(base64, "ABCDEFGH", function(text) {
-        console.log(text); //fangyunjiang is a good developer
-    }, function(){
-        console.log("error");
-    });
-}, function() {
-    console.log("error");
+var Toast = require('react-native-toast');
+var Button = require('@remobile/react-native-simple-button');
+
+module.exports = React.createClass({
+    render() {
+        return (
+            <View style={styles.container}>
+                <Button onPress={Toast.show.bind(null, "this is a message")}>
+                    show
+                </Button>
+                <Button onPress={Toast.showShortTop.bind(null, "this is a message")}>
+                    showShortTop
+                </Button>
+                <Button onPress={Toast.showShortCenter.bind(null, "this is a message")}>
+                    showShortCenter
+                </Button>
+                <Button onPress={Toast.showShortBottom.bind(null, "this is a message")}>
+                    showShortBottom
+                </Button>
+                <Button onPress={Toast.showLongTop.bind(null, "this is a message")}>
+                    showLongTop
+                </Button>
+                <Button onPress={Toast.showLongCenter.bind(null, "this is a message")}>
+                    showLongCenter
+                </Button>
+                <Button onPress={Toast.showLongBottom.bind(null, "this is a message")}>
+                    showLongBottom
+                </Button>
+            </View>
+        );
+    },
+});
+
+
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        paddingVertical:150,
+    }
 });
 ```
 
-### method
-- `encrypt(text, key, callback)`
-- `encrypt(base64, key, callback)`
+### HELP
+* look https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin
+
+
+### thanks
+* this project come from https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin
