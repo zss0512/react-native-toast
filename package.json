@@ -1,7 +1,7 @@
 {
-    "name": "@remobile/react-native-toast",
-        "version": "1.0.4",
-        "description": "A android like toast for react-native support for ios and android",
+    "name": "@remobile/react-native-des",
+        "version": "1.0.2",
+        "description": "A des crypto for react-native",
         "main": "index.js",
         "author": {
             "name": "YunJiang.Fang",
@@ -13,17 +13,17 @@
             "react-component",
             "ios",
             "android",
-            "toast",
-            "position",
+            "des",
+            "crypto",
             "remobile",
             "mobile"
         ],
-        "homepage": "https://github.com/remobile/react-native-toast",
+        "homepage": "https://github.com/remobile/react-native-des",
         "bugs": {
-            "url": "https://github.com/remobile/react-native-toast/issues"
+            "url": "https://github.com/remobile/react-native-des/issues"
         },
         "repository": {
             "type": "git",
-            "url": "git://github.com/remobile/react-native-toast.git"
+            "url": "git://github.com/remobile/react-native-des.git"
         }
 }
